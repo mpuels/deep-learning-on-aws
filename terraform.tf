@@ -45,6 +45,7 @@ resource "aws_subnet" "main" {
   vpc_id     = "${aws_vpc.main.id}"
   cidr_block = "10.0.0.0/16"
   map_public_ip_on_launch = "1"
+  availability_zone = "${var.availability_zone}"
 
   tags {
     Name = "Main"
@@ -75,4 +76,52 @@ resource "aws_route_table" "main" {
 resource "aws_route_table_association" "main" {
   subnet_id = "${aws_subnet.main.id}"
   route_table_id = "${aws_route_table.main.id}"
+}
+
+resource "aws_iam_instance_profile" "deep_learning" {
+  name  = "${aws_iam_role.deep_learning.name}"
+  role = "${aws_iam_role.deep_learning.name}"
+}
+
+resource "aws_iam_role" "deep_learning" {
+  name = "deep_learning"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "cloud_watch_put_metric_data" {
+  name = "cloud-watch-put-metric-data"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Action": [
+              "cloudwatch:PutMetricData"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+      }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "deep_learning_cloud_watch_put" {
+    role       = "${aws_iam_role.deep_learning.name}"
+    policy_arn = "${aws_iam_policy.cloud_watch_put_metric_data.arn}"
 }

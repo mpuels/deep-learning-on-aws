@@ -1,3 +1,27 @@
+# Requirements
+
+- [Terraform](https://www.terraform.io/)
+- [Vagrant](https://www.vagrantup.com/)
+- Account on [AWS](https://aws.amazon.com/)
+- [Amazon EC2 Key Pair](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+
+
+# Init: Set up VPC on AWS for VM
+
+    $ cp terraform.tfvars.template terraform.tfvars
+    $ # Set variables in terraform.tfvars
+    $ terraform init
+    $ terraform apply
+
+
+# Spin up, connect to, halt, and destroy VM on AWS
+
+    $ ./myvagrant.bash up
+    $ ./myvagrant.bash ssh
+    $ ./myvagrant.bash halt
+    $ ./myvagrant.bash destroy
+
+
 # Setting up Jupyter on AWS EC2 for remote access
 
 Create SSL certificates:
