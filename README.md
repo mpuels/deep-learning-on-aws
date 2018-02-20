@@ -8,6 +8,7 @@
 
 # Init: Set up VPC on AWS for VM
 
+    $ cd terraform
     $ cp terraform.tfvars.template terraform.tfvars
     $ # Set variables in terraform.tfvars
     $ terraform init

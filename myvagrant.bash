@@ -14,7 +14,9 @@ main() {
 }
 
 tfo() {
+    pushd terraform > /dev/null
     terraform output $1
+    popd > /dev/null
 }
 
 main $@
