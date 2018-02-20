@@ -1,0 +1,19 @@
+# One of the profiles contained in ~/.aws/credentials.
+profile = "YOUR_AWS_PROFILE"
+
+# The name of the key pair given when creating it on AWS.
+keypair_name = "KEYPAIR_NAME"
+
+# The path on your local machine to the private key corresponding to
+# 'keypair_name'.
+ssh_private_key_path = "/home/USER/.ssh/KEYPAIR_NAME.pem"
+
+region = "us-east-2"
+availability_zone = "us-east-2a"
+
+# The following AMI ids correspond to region "us-east-2".
+#aws_ami = "ami-82f4dae7" #  Ubuntu Server 16.04 LTS (HVM),SSD Volume Type
+aws_ami = "ami-d884b1bd" #  AWS Deep Learning. Release Date 2018-02-08. Version 4.
+
+#aws_instance_type = "t2.micro"
+aws_instance_type = "p2.xlarge" #  4 CPUs, 1 GPU, $0.9 per hour.
