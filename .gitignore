@@ -3,3 +3,4 @@
 *.tfvars
 .terraform/
 .vagrant/
+provisioning-scripts/jupyter-password.txt

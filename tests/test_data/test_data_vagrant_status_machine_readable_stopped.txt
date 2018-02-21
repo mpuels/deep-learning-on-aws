@@ -1,0 +1,16 @@
+1519191733,gpu,action,read_state,start
+1519191734,gpu,action,read_state,end
+1519191734,gpu,metadata,provider,aws
+1519191734,gpu,action,read_state,start
+1519191735,gpu,action,read_state,end
+1519191735,gpu,action,read_state,start
+1519191736,gpu,action,read_state,end
+1519191736,gpu,action,read_state,start
+1519191736,gpu,action,read_state,end
+1519191737,gpu,provider-name,aws
+1519191737,gpu,state,stopped
+1519191737,gpu,state-human-short,stopped
+1519191737,gpu,state-human-long,The EC2 instance is stopped. Run `vagrant up` to start it.
+1519191737,gpu,action,read_state,start
+1519191737,gpu,action,read_state,end
+1519191737,,ui,info,Current machine states:\n\ngpu                       stopped (aws)\n\nThe EC2 instance is stopped. Run `vagrant up` to start it.

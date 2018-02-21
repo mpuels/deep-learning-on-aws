@@ -1,0 +1,16 @@
+1519191197,gpu,action,read_state,start
+1519191198,gpu,action,read_state,end
+1519191198,gpu,metadata,provider,aws
+1519191198,gpu,action,read_state,start
+1519191199,gpu,action,read_state,end
+1519191199,gpu,action,read_state,start
+1519191199,gpu,action,read_state,end
+1519191199,gpu,action,read_state,start
+1519191200,gpu,action,read_state,end
+1519191200,gpu,provider-name,aws
+1519191200,gpu,state,running
+1519191200,gpu,state-human-short,running
+1519191200,gpu,state-human-long,The EC2 instance is running. To stop this machine%!(VAGRANT_COMMA) you can run\n`vagrant halt`. To destroy the machine%!(VAGRANT_COMMA) you can run `vagrant destroy`.
+1519191200,gpu,action,read_state,start
+1519191201,gpu,action,read_state,end
+1519191201,,ui,info,Current machine states:\n\ngpu                       running (aws)\n\nThe EC2 instance is running. To stop this machine%!(VAGRANT_COMMA) you can run\n`vagrant halt`. To destroy the machine%!(VAGRANT_COMMA) you can run `vagrant destroy`.
