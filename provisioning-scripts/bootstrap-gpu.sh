@@ -17,8 +17,11 @@ main() {
                         ${SSL_DIR} \
                         ${JUPYTER_PASSWORD_HASH_FILE}"
 
-    # /etc/cron.d/jupyter_notebook:
-    #@reboot ubuntu cd /home/ubuntu; source /home/ubuntu/.bashrc; /home/ubuntu/anaconda3/bin/jupyter notebook >> /home/ubuntu/jupyter.log 2>&1
+    start_jupyter_on_each_boot
+
+    su ${USER_} -c "start_jupyter_now"
+
+    print_next_step_message
 }
 
 generate_ssl_certs() {
@@ -28,7 +31,7 @@ generate_ssl_certs() {
     mkdir -p ${ssl_dir}
     pushd ${ssl_dir}
     openssl req -x509 -nodes -days 365 -newkey rsa:1024 \
-            -keyout "cert.pem" -out "cert.pem" -batch
+            -keyout "cert.pem" -out "cert.pem" -batch 2> /dev/null
     popd
 }
 
@@ -72,5 +75,35 @@ EOF
 }
 
 export -f write_jupyter_notebook_config_py
+
+start_jupyter_on_each_boot() {
+    local cron_d_cmd="@reboot ubuntu cd /home/ubuntu; source /home/ubuntu/.bashrc; /home/ubuntu/anaconda3/bin/jupyter notebook >> /home/ubuntu/jupyter.log 2>&1"
+
+    printf "Writing entry to /etc/cron.d/jupyter_notebook to start Jupyter "
+    printf "server on each boot.\n"
+
+    echo ${cron_d_cmd} > /etc/cron.d/jupyter_notebook
+}
+
+start_jupyter_now() {
+    printf "Starting Jupyter server.\n"
+
+    pushd /home/ubuntu > /dev/null
+    source /home/ubuntu/.bashrc
+    /home/ubuntu/anaconda3/bin/jupyter notebook >> /home/ubuntu/jupyter.log 2>&1 &
+
+    printf "Jupyter server started. Writing log messages to "
+    printf "/home/ubuntu/jupyter.log.\n"
+}
+
+export -f start_jupyter_now
+
+print_next_step_message() {
+    printf "EC2 machine is ready. Now on your local machine run "
+    printf "forward_port_for_jupyter.bash, then point your browser to "
+    printf "https://127.0.0.1:8157 to connect to the remote Jupyter server. As "
+    printf "password enter the one you set in "
+    printf "provisioning-scripts/jupyter-password.txt.\n"
+}
 
 main
